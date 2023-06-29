@@ -3,28 +3,11 @@ export function caesarCipher(string, key) {
     let code = l.charCodeAt(0);
 
     if (code >= 60 && code <= 90) {
-      code += key;
-
-      if (code > 90) {
-        return code - 26;
-      } else if (code < 60) {
-        return code + 26;
-      } else {
-        return code;
-      }
+      code = ((((code - 65 + key) % 26) + 26) % 26) + 65;
     } else if (code >= 97 && code <= 122) {
-      code += key;
-
-      if (code > 122) {
-        return code - 26;
-      } else if (code < 97) {
-        return code + 26;
-      } else {
-        return code;
-      }
-    } else {
-      return code;
+       code = ((((code - 97 + key) % 26) + 26) % 26) + 97;
     }
+    return code;
   });
   return String.fromCharCode(...res);
 }
